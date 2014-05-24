@@ -16,6 +16,7 @@ function Trianglify(options) {
         bleed: defaults(options.cellsize, 150),
         cellpadding: defaults(options.cellpadding, 0.1*options.cellsize || 15),
         noiseIntensity: defaults(options.noiseIntensity, 0.3),
+        blurIntensity: defaults(options.blurIntensity, 0),
         x_gradient: defaults(options.x_gradient, Trianglify.randomColor()),
         format: defaults(options.format, "svg"),
     };
@@ -106,7 +107,7 @@ Trianglify.Pattern.prototype.generateSVG = function () {
     svg.attr('xmlns', 'http://www.w3.org/2000/svg');
     var group = svg.append("g");
 
-
+    // Noise
     if (options.noiseIntensity > 0.01) {
         var filter = svg.append("filter").attr("id", "noise");
 
@@ -141,6 +142,17 @@ Trianglify.Pattern.prototype.generateSVG = function () {
             .attr('width', '100%')
             .attr('height', '100%')
             .attr("filter", "url(#noise)");
+    }
+
+    // Blur
+    if (options.blurIntensity > 0) {
+        var filter = svg.append("filter").attr("id", "blur");
+
+        filter.append("feGaussianBlur")
+            .attr("stdDeviation", options.blurIntensity);
+
+        group
+            .attr('filter', 'url(#blur)');
     }
 
     this.polys.forEach(function(d) {
