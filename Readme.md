@@ -1,8 +1,8 @@
 # Trianglify
 
-Trianglify is a library that I wrote to generate nice SVG background images like this one:
+Trianglify is a library that I wrote to generate nice SVG background images like this one - **this fork adds blur!**
 
-![example](example.jpg)
+![example](example.png)
 
 It was inspired by [btmills/geopattern](https://github.com/btmills/geopattern), and uses [d3.js](http://d3js.org) to build the polygons and SVG and SVG filters for rendering. It also includes the [colorbrewer](http://bl.ocks.org/mbostock/5577023) color palette library to get you up and running quickly. It was written in a single day because I got fed up with Adobe Illustrator.
 
@@ -130,6 +130,7 @@ cellsize | set how large the generated cells should be | integers > 0 | 150
 bleed | set how far outside the visible area of the SVG points should be rendered | integers > 0 | cellsize
 cellpadding | set the minimum distance between each point | integers > 0 and < cellsize/2 | cellsize*0.1
 noiseIntensity | set the opacity of the noise filter. This has a significant impact on SVG rendering time - set to 0 to disable. | 0 to 1 | 0.3
+blurIntensity | set the (Gaussian) blur level on the triangles container. Disabled by default (i.e. 0). | 0 to 100 | 0
 x_gradient | an array of colors to use to construct a gradient for the x-axis | array of colors in hexadecimal string format (i.e. `["#961E00", "#FF0000", "#EEEEEE"]`) | random selection from colorbrewer palettes
 y_gradient | an array of colors to use to construct a gradient for the y-axis | array of colors in hexadecimal string format (i.e. `["#961E00", "#FF0000", "#EEEEEE"]`) | x_gradient, brightened by a factor of 0.5
 
